@@ -12,5 +12,5 @@ public class CourseResponseDto {
     private Long courseId;
     private String courseName;
     private String courseDescription;
-    private List<StudentResponseDto> student;
+
 }

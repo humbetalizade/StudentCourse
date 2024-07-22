@@ -12,5 +12,5 @@ public class StudentRequestDto {
     private String name;
     private String surname;
     private Integer age;
-    private Long courseId;
+    private List<Long> courseIds;
 }

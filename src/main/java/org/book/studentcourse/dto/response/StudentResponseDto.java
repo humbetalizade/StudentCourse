@@ -13,5 +13,5 @@ public class StudentResponseDto {
     private String name;
     private String surname;
     private Integer age;
-    private List<CourseResponseDto> course;
+    private List<CourseResponseDto> courses;
 }

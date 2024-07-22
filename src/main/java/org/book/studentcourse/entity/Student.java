@@ -1,5 +1,7 @@
 package org.book.studentcourse.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,10 +10,9 @@ import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
-@Table(name = "Student")
+@Table(name = "student")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -32,6 +33,14 @@ public class Student {
     @Column(name = "student_age")
     private int studentAge;
 
+
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Course> courses;
+    @JoinTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    @JsonIgnore
+    @JsonManagedReference
+    private Set<Course> courses;
 }

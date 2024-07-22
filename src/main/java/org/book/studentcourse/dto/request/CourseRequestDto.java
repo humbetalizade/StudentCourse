@@ -11,5 +11,4 @@ import java.util.List;
 public class CourseRequestDto {
     private String courseName;
     private String courseDescription;
-    private Long studentId;
 }

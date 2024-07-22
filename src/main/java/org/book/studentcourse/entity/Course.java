@@ -1,7 +1,13 @@
 package org.book.studentcourse.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Set;
@@ -18,14 +24,15 @@ public class Course {
     @Column(name = "course_id")
     private Long courseId;
 
-    @Column(name = "course_Name")
+    @Column(name = "course_name")
     private String name;
 
     @Column(name = "description")
     private String description;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "courses")
-    private List<Student> students;
-
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "courses")
+    @JsonIgnore
+    @JsonBackReference
+    private Set<Student> students;
 }

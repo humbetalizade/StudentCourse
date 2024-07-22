@@ -12,10 +12,7 @@ import org.book.studentcourse.repository.StudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,23 +22,25 @@ public class StudentService {
     private final ModelMapper modelMapper;
     private final CourseRepository courseRepository;
 
-    public void createStudent(StudentRequestDto student) {
-        Student student2 = modelMapper.map(student, Student.class);
-        List<Long>courseId= Collections.singletonList(student.getCourseId());
-        List<Course> courses = new ArrayList<>();
-        for(Long id : courseId){
-            Course course = courseRepository.findById(id).orElseThrow();
+    public void createStudent(StudentRequestDto studentRequestDto) {
+        Set<Course> courses = new HashSet<>();
+        for (Long courseId : studentRequestDto.getCourseIds()){
+            Course course = courseRepository.findById(courseId).orElseThrow(() -> new RuntimeException("Course not found"));
             courses.add(course);
         }
-        student2.setCourses(courses);
-        studentRepository.save(student2);
+
+        Student student = modelMapper.map(studentRequestDto, Student.class);
+        student.setCourses(courses);
+
+        studentRepository.save(student);
+
     }
 
     public List<StudentResponseDto> getAllStudents() {
         List<Student> students = studentRepository.findAll();
         return students.stream()
                 .map(item->modelMapper.map(item,StudentResponseDto.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public StudentResponseDto findById(Long id) {

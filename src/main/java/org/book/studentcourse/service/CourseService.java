@@ -21,15 +21,8 @@ public class CourseService {
     private final StudentRepository studentRepository;
 
     public void add(CourseRequestDto courseRequestDto) {
-        Course course2 = modelMapper.map(courseRequestDto, Course.class);
-        List<Long>studentIds= Collections.singletonList(courseRequestDto.getStudentId());
-        List<Student> students = new ArrayList<>();
-        for(Long id : studentIds){
-            Student student = studentRepository.findById(id).orElseThrow();
-            students.add(student);
-        }
-        course2.setStudents(students);
-        courseRepository.save(course2);
+        Course course = modelMapper.map(courseRequestDto, Course.class);
+        courseRepository.save(course);
     }
 
 
@@ -37,7 +30,7 @@ public class CourseService {
         List<Course> courses = courseRepository.findAll();
         return courses.stream()
                 .map(item -> modelMapper.map(item, CourseResponseDto.class))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public CourseResponseDto findById(Long id) {

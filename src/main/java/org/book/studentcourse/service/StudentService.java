@@ -3,7 +3,6 @@ package org.book.studentcourse.service;
 
 import lombok.RequiredArgsConstructor;
 import org.book.studentcourse.dto.request.StudentRequestDto;
-import org.book.studentcourse.dto.response.CourseResponseDto;
 import org.book.studentcourse.dto.response.StudentResponseDto;
 import org.book.studentcourse.entity.Course;
 import org.book.studentcourse.entity.Student;
@@ -13,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

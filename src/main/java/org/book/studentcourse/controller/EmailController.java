@@ -17,6 +17,8 @@ public class EmailController {
     }
 
 
+
+
     @RequestMapping("/send/simple")
     public void sendEmail(@RequestBody EmailRequestDto email){
         emailService.sendEmail(email);

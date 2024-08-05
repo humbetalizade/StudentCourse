@@ -3,8 +3,8 @@ package org.book.studentcourse.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.book.studentcourse.dto.request.StudentRequestDto;
-import org.book.studentcourse.dto.response.CourseResponseDto;
 import org.book.studentcourse.dto.response.StudentResponseDto;
+import org.book.studentcourse.service.GoodReadsService;
 import org.book.studentcourse.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentController {
     private final StudentService studentService;
+    private final GoodReadsService goodReadsService;
 
 
     @PostMapping("/add")
